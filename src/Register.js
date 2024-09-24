@@ -2,26 +2,50 @@ import React, { useState, useEffect } from "react";
 import "./Register.css"; 
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    date: "",
-    startTime: "",
-    destination: "",
-    phoneNumber: "",
-    partySize: 1,
-    tripDuration: 1,
-  });
-  const [sessionKey, setSessionKey] = useState("");
-
-  const destinations = ["Destination 1", "Destination 2", "Destination 3"];
-
-  useEffect(() => {
-    const newSessionKey = Math.random().toString(36).substring(2, 15);
-    setSessionKey(newSessionKey);
-  }, []);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const [formData, setFormData] = useState({
+      date: "",
+      startTime: "",
+      destination: "",
+      phoneNumber: "",
+      partySize: 1,
+      tripDuration: 1,
+    });
+    const [sessionKey, setSessionKey] = useState("");
+  
+    const destinations = ["Destination 1", "Destination 2", "Destination 3"];
+  
+    useEffect(() => {
+      const newSessionKey = Math.random().toString(36).substring(2, 15);
+      setSessionKey(newSessionKey);
+    }, []);
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+  
+      // For phone number, apply the formatting function
+      if (name === "phoneNumber") {
+        setFormData({ ...formData, [name]: formatPhoneNumber(value) });
+      } else {
+        setFormData({ ...formData, [name]: value });
+      }
+    };
+  
+    const formatPhoneNumber = (value) => {
+      // Remove all non-digit characters
+      const cleaned = ('' + value).replace(/\D/g, '');
+  
+      // Add formatting: (XXX-XXX-XXXX)
+      const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+      if (match) {
+        let formatted = '';
+        if (match[1]) formatted += match[1];
+        if (match[2]) formatted += '-' + match[2];
+        if (match[3]) formatted += '-' + match[3];
+        return formatted;
+      }
+  
+      return value;
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,6 +125,7 @@ const Register = () => {
         <input
           type="tel"
           name="phoneNumber"
+          placeholder="XXX-XXX-XXXX"
           value={formData.phoneNumber}
           onChange={handleChange}
           required
