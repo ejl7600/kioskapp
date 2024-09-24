@@ -1,0 +1,85 @@
+.kiosk-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; 
+  }
+  
+
+  .kiosk-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .kiosk-form input,
+  .kiosk-form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .kiosk-form input:hover,
+  .kiosk-form select:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+
+  .kiosk-form input:focus,
+  .kiosk-form select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  }
+  
+
+  .submit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+
+  .submit-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  }
+  
+  @media (max-width: 600px) {
+    .kiosk-form {
+      max-width: 100%; 
+      padding: 10px; 
+    }
+  
+    .kiosk-form input,
+    .kiosk-form select {
+      font-size: 14px; 
+    }
+  
+    .submit-btn {
+      font-size: 14px;
+    }
+  }
+  
