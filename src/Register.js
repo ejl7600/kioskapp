@@ -21,8 +21,7 @@ const Register = () => {
   
     const handleChange = (e) => {
       const { name, value } = e.target;
-  
-      // For phone number, apply the formatting function
+
       if (name === "phoneNumber") {
         setFormData({ ...formData, [name]: formatPhoneNumber(value) });
       } else {
@@ -31,21 +30,26 @@ const Register = () => {
     };
   
     const formatPhoneNumber = (value) => {
-      // Remove all non-digit characters
-      const cleaned = ('' + value).replace(/\D/g, '');
-  
-      // Add formatting: (XXX-XXX-XXXX)
-      const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
-      if (match) {
-        let formatted = '';
-        if (match[1]) formatted += match[1];
-        if (match[2]) formatted += '-' + match[2];
-        if (match[3]) formatted += '-' + match[3];
-        return formatted;
-      }
-  
-      return value;
-    };
+    // Remove all non-digit characters
+    const cleaned = ('' + value).replace(/\D/g, '');
+
+    // Limit to max 10 digits
+    if (cleaned.length > 10) {
+      cleaned = cleaned.substring(0, 10);
+    }
+
+    // Add formatting: (XXX-XXX-XXXX)
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+    if (match) {
+      let formatted = '';
+      if (match[1]) formatted += match[1];
+      if (match[2]) formatted += '-' + match[2];
+      if (match[3]) formatted += '-' + match[3];
+      return formatted;
+    }
+
+    return value;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -128,6 +132,7 @@ const Register = () => {
           placeholder="XXX-XXX-XXXX"
           value={formData.phoneNumber}
           onChange={handleChange}
+          maxLength="12" 
           required
         />
       </label>
