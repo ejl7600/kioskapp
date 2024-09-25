@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Register.css"; 
 
+//Should eventually only use process.env
+const API_PORT = process.env.API_PORT || 5000;
+
 const Register = () => {
     const [formData, setFormData] = useState({
       date: "",
@@ -56,7 +59,7 @@ const Register = () => {
 
     const payload = { ...formData, sessionKey };
 
-    fetch("http://your-server-url/api/submit", {
+    fetch(`${window.location.protocol}//${window.location.hostname}:${API_PORT}/submit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
