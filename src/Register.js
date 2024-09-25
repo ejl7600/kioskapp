@@ -33,15 +33,13 @@ const Register = () => {
     };
   
     const formatPhoneNumber = (value) => {
-    // Remove all non-digit characters
     const cleaned = ('' + value).replace(/\D/g, '');
 
-    // Limit to max 10 digits
     if (cleaned.length > 10) {
       cleaned = cleaned.substring(0, 10);
     }
 
-    // Add formatting: (XXX-XXX-XXXX)
+
     const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
     if (match) {
       let formatted = '';
